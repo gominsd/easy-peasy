@@ -1,0 +1,23 @@
+# Render 배포용 Blueprint (Infrastructure as Code)
+# Render 대시보드 → New → Blueprint → 이 저장소 선택 시 자동 인식됩니다.
+services:
+  - type: web
+    name: easy-peasy
+    runtime: node
+    plan: free
+    region: singapore # 한국에서 가장 가까운 무료 리전
+    buildCommand: npm install
+    startCommand: node server.js
+    healthCheckPath: /
+    autoDeploy: true # main 브랜치 푸시 시 자동 재배포
+    envVars:
+      # 아래 3개는 비밀 키 → Render 대시보드에서 직접 입력 (sync:false)
+      - key: NAVER_CLIENT_ID
+        sync: false
+      - key: NAVER_CLIENT_SECRET
+        sync: false
+      - key: GEMINI_API_KEY
+        sync: false
+      # 모델 폴백 순서 (공개 가능 → 값 고정)
+      - key: GEMINI_MODEL
+        value: gemini-2.5-flash-lite,gemini-2.5-flash,gemini-2.0-flash
