@@ -72,12 +72,17 @@ function showResult(data) {
            <h3>📚 네이버 백과사전에서 참고했어요</h3>
            <ul>
              ${data.sources
-               .map(
-                 (s) =>
-                   `<li><a href="${escapeAttr(s.link)}" target="_blank" rel="noopener">${escapeHtml(
+               .map((s) => {
+                 const src = s.source
+                   ? escapeHtml(s.source)
+                   : '네이버 지식백과';
+                 return `<li>
+                   <span class="source-name">${src}</span>
+                   <a href="${escapeAttr(s.link)}" target="_blank" rel="noopener">${escapeHtml(
                      s.title
-                   )}</a></li>`
-               )
+                   )}</a>
+                 </li>`;
+               })
                .join('')}
            </ul>
          </div>`

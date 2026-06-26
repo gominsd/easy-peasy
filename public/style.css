@@ -296,7 +296,7 @@ body {
   font-size: 23px;
   font-weight: 700;
   letter-spacing: -0.01em;
-  color: var(--ink);
+  color: var(--primary); /* 소제목(한 줄 뜻/자세한 설명/예시) 파란색 */
   margin-bottom: 10px;
 }
 
@@ -323,18 +323,42 @@ body {
 
 .sources ul {
   margin: 0;
-  padding-left: 20px;
+  padding: 0;
+  list-style: none;
 }
 
 .sources li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
   font-size: 18px;
-  line-height: 1.9;
+  line-height: 1.6;
+  padding: 7px 0;
   color: var(--ink-muted);
+  border-top: 1px solid var(--divider-soft);
+}
+
+.sources li:first-child {
+  border-top: none;
+}
+
+/* 출처명 라벨 (예: 농업용어사전, 지구과학산책) */
+.source-name {
+  flex-shrink: 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--primary);
+  background: var(--primary-tint);
+  padding: 4px 12px;
+  border-radius: var(--r-pill);
+  white-space: nowrap;
 }
 
 .sources a {
-  color: var(--primary); /* 단일 액센트 */
+  color: var(--ink); /* 항목 제목은 본문색, 출처명에 파란 강조 */
   text-decoration: none;
+  border-bottom: 1px solid var(--hairline);
 }
 
 .sources a:active {

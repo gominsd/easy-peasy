@@ -73,8 +73,33 @@ async function searchNaverEncyc(query) {
     title: stripTags(it.title),
     description: stripTags(it.description),
     link: it.link,
+    source: extractSource(it.title, it.description), // 출처명 (예: 농업용어사전, 지구과학산책)
   }));
   return items;
+}
+
+// 네이버 백과사전 검색 결과에서 출처명을 뽑아냄.
+// 출처는 보통 description 맨 앞(제목 바로 뒤)이나 "(출처: …)" 형태로 들어있다.
+// 백과 항목처럼 출처 표기가 없으면 빈 문자열을 반환한다.
+function extractSource(rawTitle, rawDescription) {
+  const title = stripTags(rawTitle);
+  let desc = stripTags(rawDescription);
+  if (title && desc.startsWith(title)) desc = desc.slice(title.length).trimStart();
+
+  // 1) 제목 바로 뒤 출처 라벨 (○○사전 / ○○백과 / ○○산책 / 용어해설 등으로 끝남)
+  const KW =
+    '(?:국어사전|영어사전|한자사전|용어사전|백과사전|미술대사전|용어해설|지식백과|대백과|백과|사전|산책|해설|도감|박물지|상식)';
+  const prefixRe = new RegExp(
+    '^([0-9A-Za-z·가-힣\\s]{1,25}?' + KW + ')(?=[\\s:：]|$)'
+  );
+  let m = desc.match(prefixRe);
+  if (m) return m[1].replace(/\s+/g, ' ').trim();
+
+  // 2) 본문 중 "(출처: ○○)" 형태
+  m = desc.match(/\(([^()]*출처\s*[:：]\s*[^()]+)\)/);
+  if (m) return m[1].replace(/.*출처\s*[:：]\s*/, '').replace(/\s+/g, ' ').trim();
+
+  return '';
 }
 
 // HTML 태그/엔티티 정리
