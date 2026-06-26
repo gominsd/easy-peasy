@@ -1,0 +1,8 @@
+# 모든 텍스트 파일은 저장소에서 LF로 정규화 (크로스 플랫폼 일관성)
+* text=auto eol=lf
+
+# 바이너리 취급
+*.woff2 binary
+*.png binary
+*.jpg binary
+*.ico binary

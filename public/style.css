@@ -1,0 +1,409 @@
+/* =========================================================
+   쉽게 말해줘 — Apple 디자인 언어 기반
+   (초등학생 가독성을 위해 본문 17px → 20px 등 전반 확대)
+   ========================================================= */
+
+@font-face {
+  font-family: "SeoulNotice";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/2505-1@1.0/SeoulAlrimTTF-Heavy.woff2")
+    format("woff2");
+  font-weight: 900;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "SeoulNotice";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/2505-1@1.0/SeoulAlrimTTF-Medium.woff2")
+    format("woff2");
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Suit";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-SemiBold.woff2")
+    format("woff2");
+  font-weight: 600;
+  font-display: swap;
+}
+
+:root {
+  /* 색상 — 단일 블루 액센트 */
+  --primary: #0066cc; /* Action Blue: 모든 상호작용 요소 */
+  --primary-focus: #0071e3; /* 포커스 링 */
+  --primary-tint: #eef4ff; /* 선택/강조 옅은 파랑 배경 */
+
+  /* 서피스 */
+  --canvas: #ffffff;
+  --parchment: #f5f5f7; /* 시그니처 오프화이트 */
+  --tile-dark: #272729;
+
+  /* 텍스트 */
+  --ink: #1d1d1f; /* 근검정 잉크 */
+  --ink-muted: #6e6e73; /* 보조 텍스트 */
+  --ink-faint: #86868b; /* 핀트, 캡션 */
+
+  /* 헤어라인 */
+  --hairline: #e0e0e0;
+  --divider-soft: #f0f0f0;
+
+  /* 형태 */
+  --r-sm: 8px;
+  --r-lg: 18px;
+  --r-pill: 9999px;
+
+  /* 단 하나의 그림자 (제품 이미지 전용 정신을 따르되, 여기선 카드에 아주 옅게만) */
+  --product-shadow: 0 3px 30px rgba(0, 0, 0, 0.06);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", "Noto Sans KR", system-ui, -apple-system,
+    "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  font-size: 20px; /* 본문 기준 (Apple 17 → 아동용 20) */
+  line-height: 1.6;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  background: var(--parchment); /* 기본 캔버스: 양피지 오프화이트 */
+  word-break: keep-all;
+}
+
+.app {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 64px 20px 96px;
+}
+
+/* ---------------- Hero ---------------- */
+.hero {
+  text-align: center;
+  margin-bottom: 48px;
+}
+
+.hero h1 {
+  font-family: "SeoulNotice", "Inter", "Noto Sans KR", sans-serif;
+  font-size: 56px;
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  margin: 0 0 14px;
+}
+
+.subtitle {
+  font-family: "SeoulNotice", "Inter", "Noto Sans KR", sans-serif;
+  font-size: 23px;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--ink-muted);
+  margin: 0;
+}
+
+/* ---------------- Card (검색) ---------------- */
+.card {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-lg);
+  padding: 32px;
+  box-shadow: var(--product-shadow);
+}
+
+.field-label {
+  display: block;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.input-row {
+  display: flex;
+  gap: 12px;
+}
+
+#word {
+  flex: 1;
+  min-width: 0;
+  padding: 16px 22px;
+  font: inherit;
+  font-size: 21px;
+  color: var(--ink);
+  background: var(--canvas);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: var(--r-pill); /* 검색창도 풀 필 */
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+#word::placeholder {
+  color: var(--ink-faint);
+}
+
+#word:focus {
+  border-color: var(--primary);
+}
+
+/* 파란 필 CTA — 시그니처 액션 */
+#submit-btn {
+  flex-shrink: 0;
+  padding: 16px 30px;
+  font: inherit;
+  font-size: 20px;
+  font-weight: 600;
+  color: #fff;
+  background: var(--primary);
+  border: none;
+  border-radius: var(--r-pill);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform 0.08s ease;
+}
+
+#submit-btn:active {
+  transform: scale(0.95); /* 시스템 공통 마이크로 인터랙션 */
+}
+
+#submit-btn:focus-visible {
+  outline: 2px solid var(--primary-focus);
+  outline-offset: 2px;
+}
+
+#submit-btn:disabled {
+  background: #a9c7ee;
+  cursor: default;
+}
+
+/* ---------------- 난이도 칩 ---------------- */
+.levels {
+  border: none;
+  padding: 0;
+  margin: 28px 0 0;
+}
+
+.levels legend {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 14px;
+  padding: 0;
+}
+
+.level-options {
+  display: flex;
+  gap: 12px;
+}
+
+.level-chip {
+  flex: 1;
+  text-align: center;
+  padding: 16px 10px;
+  font-size: 19px;
+  font-weight: 600;
+  color: var(--ink-muted);
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-pill); /* 필 그래머 */
+  cursor: pointer;
+  user-select: none;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+
+.level-chip input {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.level-chip.selected {
+  color: var(--primary);
+  background: var(--primary-tint);
+  border: 2px solid var(--primary);
+  padding: 15px 9px; /* 2px 보더 보정 */
+}
+
+/* ---------------- 결과 영역 ---------------- */
+.result-area {
+  margin-top: 28px;
+}
+
+.result-card {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-lg);
+  padding: 40px;
+  box-shadow: var(--product-shadow);
+  animation: rise 0.25s ease;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.result-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+
+.result-head h2 {
+  margin: 0;
+  font-size: 40px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+}
+
+/* 학년 배지 — 옅은 파랑 필 */
+.result-head .badge {
+  flex-shrink: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--primary);
+  background: var(--primary-tint);
+  padding: 8px 16px;
+  border-radius: var(--r-pill);
+  white-space: nowrap;
+}
+
+/* 검색 결과 설명(한 줄 뜻 / 자세한 설명 / 예시)만 Suit 폰트 */
+.explanation {
+  font-family: "Suit", "Noto Sans KR", sans-serif;
+}
+
+/* 항목 블록 — 색이 아닌 여백과 헤어라인으로 구분 */
+.section + .section {
+  margin-top: 28px;
+  padding-top: 28px;
+  border-top: 1px solid var(--divider-soft);
+}
+
+.section-title {
+  font-size: 23px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ink);
+  margin-bottom: 10px;
+}
+
+/* 한 줄 뜻 / 자세한 설명 / 예시 본문 — 글씨 크기 동일하게 통일 */
+.section-body {
+  font-size: 20px;
+  line-height: 1.7;
+  color: var(--ink);
+}
+
+/* ---------------- 출처 ---------------- */
+.sources {
+  margin-top: 32px;
+  padding-top: 24px;
+  border-top: 1px solid var(--divider-soft);
+}
+
+.sources h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink-muted);
+  margin: 0 0 10px;
+}
+
+.sources ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.sources li {
+  font-size: 18px;
+  line-height: 1.9;
+  color: var(--ink-muted);
+}
+
+.sources a {
+  color: var(--primary); /* 단일 액센트 */
+  text-decoration: none;
+}
+
+.sources a:active {
+  opacity: 0.7;
+}
+
+/* ---------------- 로딩 / 에러 ---------------- */
+.loading,
+.error {
+  background: var(--canvas);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-lg);
+  padding: 40px;
+  text-align: center;
+  font-size: 20px;
+  color: var(--ink-muted);
+}
+
+.error {
+  color: #b3261e;
+  background: #fff5f5;
+  border-color: #f3d6d3;
+}
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--divider-soft);
+  border-top-color: var(--primary);
+  border-radius: 50%;
+  margin: 0 auto 16px;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ---------------- 반응형 ---------------- */
+@media (max-width: 640px) {
+  .app {
+    padding: 40px 16px 72px;
+  }
+  .hero h1 {
+    font-size: 38px;
+  }
+  .subtitle {
+    font-size: 20px;
+  }
+  .card,
+  .result-card {
+    padding: 24px;
+  }
+  .input-row {
+    flex-direction: column;
+  }
+  #submit-btn {
+    padding: 16px;
+  }
+  .level-options {
+    flex-direction: column;
+  }
+  .result-head {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .result-head h2 {
+    font-size: 32px;
+  }
+}

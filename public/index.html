@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>쉽게 말해줘</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="hero">
+        <h1>🗣️ 쉽게 말해줘</h1>
+        <p class="subtitle">어려운 낱말을 학년에 맞게 쉽게 풀어 드려요</p>
+      </header>
+
+      <section class="card">
+        <form id="search-form">
+          <label class="field-label" for="word">알고 싶은 낱말</label>
+          <div class="input-row">
+            <input
+              id="word"
+              type="text"
+              placeholder="예) 광합성, 민주주의, 중력"
+              autocomplete="off"
+              required
+            />
+            <button type="submit" id="submit-btn">쉽게 알아보기</button>
+          </div>
+
+          <fieldset class="levels">
+            <legend>설명 난이도를 골라 주세요</legend>
+            <div class="level-options" id="level-options">
+              <label class="level-chip">
+                <input type="radio" name="level" value="1" />
+                <span>초 1~2학년</span>
+              </label>
+              <label class="level-chip selected">
+                <input type="radio" name="level" value="2" checked />
+                <span>초 3~4학년</span>
+              </label>
+              <label class="level-chip">
+                <input type="radio" name="level" value="3" />
+                <span>초 5~6학년</span>
+              </label>
+            </div>
+          </fieldset>
+        </form>
+      </section>
+
+      <section id="result-area" class="result-area" aria-live="polite"></section>
+    </main>
+
+    <script src="app.js"></script>
+  </body>
+</html>
